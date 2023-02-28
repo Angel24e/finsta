@@ -1,8 +1,8 @@
-const Profile = require('./profile');
+const Profile = require('./Profile');
 
-const Posts = require('./posts');
+const Post = require('./Post');
 
-Profile.hasMany( Posts , {
+Profile.hasMany( Post , {
     foreignKey: 'profile_id'
 });
 

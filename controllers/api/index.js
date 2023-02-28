@@ -4,8 +4,8 @@ const postRoutes = require('./postRoutes');
 
 const profileRoutes = require('./profileRoutes');
 
-router.use('/users', postRoutes);
+router.use('/post', postRoutes);
 
-router.use('/projects', profileRoutes);
+router.use('/profile', profileRoutes);
 
 module.exports = router;
