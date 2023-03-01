@@ -3,7 +3,7 @@ const { Post, Profile } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
-    // Gets all posts and joins with profile data
+    // Gets all posts and joins with profile data by name.
     try { 
         const postData = await Post.findAll({
             include: [ {
@@ -19,34 +19,59 @@ router.get('/', withAuth, async (req, res) => {
         res.render('mainpage',{
             posts,
             logged_in: req.session.logged_in
-
         });
 
     } catch (err) {
         res.status(500).json(err);
     }
 });
-///// do we need auth in this one ? 
-router.get('/posts/:id', withAuth, async (req, res) => { 
-    try {  const postData = await Post.findByPk(req.params.id, {
+
+router.get('/post/:id', withAuth, async (req, res) => { 
+    try {  
+      const postData = await Post.findByPk(req.params.id, {
         include: [
           {
-            model: User,
+            model: Post,
             attributes: ['name'],
           },
         ],
       });
+      const post = postData.get({ plain: true });
   
-      const project = postData.get({ plain: true });
-  
-      res.render('project', {
-        ...project,
+      res.render('post', {
+        ...post,
         logged_in: req.session.logged_in
       });
 
     } catch (err) {
-
+      res.status(500).json(err)
     }
+});
+
+
+router.get('/profile', withAuth, async (req,res) => {
+  try {
+    //finds profile based on the session ID
+    const profileData = await Profile.findBypk(req.session.user_id, {
+      attributes: {exclude: ['password']},
+      include: [{model: Post }],
+    });
+    const profile = profileData.get({plain:true});
+    res.render('profile',{
+      ...profile,
+      logged_in: true
+    });
+  } catch (err){
+    res.status(500).json(err);
+  }
+});
+// if user is already logged in, redirects the request to another dimension
+router.get('/login',(req,res)=>{
+  if(req.session.logged_in){
+    res.redirect('/profile');
+    return;
+  }
+  res.render('login');
 });
 
 module.exports = router;
