@@ -41,7 +41,7 @@ Profile.init(
           type: DataTypes.INTEGER,
           allowNull: false,
           references: {
-            model: 'posts',
+            model: 'post',
             key: 'id'
           }
         }
@@ -61,7 +61,7 @@ Profile.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'user',
+        modelName: 'profile',
       }
 )
 
