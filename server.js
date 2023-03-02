@@ -42,11 +42,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-app.get('/login', (req, res) => {
-  res.render('login', {title: 'Log In Form', layout: 'layout'});
-});
-
-
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
