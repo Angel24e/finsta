@@ -52,7 +52,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
 router.get('/profile', withAuth, async (req,res) => {
   try {
     //finds profile based on the session ID
-    const profileData = await Profile.findBypk(req.session.user_id, {
+    const profileData = await Profile.findByPk(req.session.user_id, {
       attributes: {exclude: ['password']},
       include: [{model: Post }],
     });
