@@ -22,10 +22,9 @@ Post.init(
             allowNull: false,
 
         },
-        image: {
+        fints: {
             type: DataTypes.STRING,
             allowNull: false
-
         },
         profile_id: {
             type: DataTypes.INTEGER,
