@@ -1,14 +1,14 @@
 require('dotenv').config();
-const Profile = require('./Profile');
+const User = require('./User');
 
 const Post = require('./Post');
 
-Profile.hasMany( Post , {
-    foreignKey: 'profile_id'
+User.hasMany( Post , {
+    foreignKey: 'user_id'
 });
 
-Post.belongsTo( Profile , {
-    foreignKey: 'profile_id'
+Post.belongsTo( User , {
+    foreignKey: 'user_id'
 });
 
-module.exports = { Profile, Post };
+module.exports = { User, Post };
