@@ -1,4 +1,5 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -17,7 +18,7 @@ router.post('/', withAuth, async (req, res) => {
 ///// ---- DO WE NEED this AUTH TO DELETE A POST? ---////
 router.delete('/:id', withAuth, async (req, res) => {
     try {
-        postData = await Post.destroy({
+        const postData = await Post.destroy({
             where: {
                 id: req.params.id,
                 user_id: req.session.user_id,
@@ -28,6 +29,7 @@ router.delete('/:id', withAuth, async (req, res) => {
             res.status(404).json({ message: 'No posts found with this ID' })
             return;
         }
+        
         res.status(200).json(postData);
     } catch (err) {
         res.status(500).json(err);
