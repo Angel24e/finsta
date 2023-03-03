@@ -2,11 +2,12 @@ const router = require('express').Router();
 const { Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
   // Gets all posts and joins with user data by name.
   try {
     const postData = await Post.findAll({
-      include: [{
+      include: [
+        {
         model: User,
         attributes: ['name'],
       },
@@ -16,7 +17,7 @@ router.get('/', withAuth, async (req, res) => {
     const posts = postData.map((post) => post.get({ plain: true }));
 
     // passing serialized data and session flag into template
-    res.render('main', {
+    res.render('mainpage', {
       posts,
       logged_in: req.session.logged_in
     });
@@ -26,19 +27,19 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/post/:id', withAuth, async (req, res) => {
+router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
         {
-          model: Post,
+          model: User,
           attributes: ['name'],
         },
       ],
     });
     const post = postData.get({ plain: true });
 
-    res.render('posts', {
+    res.render('post', {
       ...post,
       logged_in: req.session.logged_in
     });
@@ -57,6 +58,7 @@ router.get('/profile', withAuth, async (req, res) => {
       include: [{ model: Post }],
     });
     const user = userData.get({ plain: true });
+    
     res.render('profile', {
       ...user,
       logged_in: true
@@ -65,6 +67,26 @@ router.get('/profile', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get('/newpost', withAuth, async (req, res) => {
+  try {
+    //find our logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Post}],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('newpost', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // if user is already logged in, redirects the request to another dimension
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {

@@ -11,27 +11,55 @@ Post.init(
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
-        },
-        comments: {
+          },
+          name: {
             type: DataTypes.STRING,
             allowNull: false,
-
-        },
-        likes: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-
-        },
-        fints: {
+          },
+          description: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        user_id: {
+          },
+          date_created: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+          },
+          post: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+          },
+          user_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'user',
-                key: 'id',
+              model: 'user',
+              key: 'id',
             },
+        // id: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        //     primaryKey: true,
+        //     autoIncrement: true,
+        // },
+        // comments: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+
+        // },
+        // likes: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+
+        // },
+        // fints: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // },
+        // user_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'user',
+        //         key: 'id',
+        //     },
         },
 
     },
