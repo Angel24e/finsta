@@ -15,7 +15,7 @@ router.post('/', withAuth, async (req, res) => {
 
     }
 });
-///// ---- DO WE NEED this AUTH TO DELETE A POST? ---////
+
 router.delete('/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.destroy({

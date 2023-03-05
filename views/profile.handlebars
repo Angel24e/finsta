@@ -1,90 +1,55 @@
-{{!-- <div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
-  </div>
-</div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Create a New Project:</h3>
-
-    <form class="form new-project-form">
-      <div class="form-group">
-        <label for="project-name">project name:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
-      </div>
-      <div class="form-group">
-        <label for="project-funding">needed funding ($):</label>
-        <input class="form-input" type="number" id="project-funding" name="project-funding" />
-      </div>
-      <div class="form-group">
-        <label for="project-desc">description:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
-
-  {{#if projects.length}}
-  <div class="col-md-6 project-list">
-    <h3>Current Projects:</h3>
-
-    {{#each projects as |project|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/project/{{project.id}}">{{project.name}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
-      </div>
-    </div>
-    {{/each}}
-  </div>
-  {{/if}}
-</div> --}}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Finsta</a>
+  {{!-- <a class="navbar-brand" href="/">Finsta</a> --}}
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Topics
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="">Topic 1</a>
-          <a class="dropdown-item" href="">Topic 2</a>
-          <a class="dropdown-item" href="">Topic 3</a>
-        </div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#" id="post-button">Posts</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0 mr-3">
       <input class="form-control mr-sm-2" type="search" placeholder="Search for Topics or Questions" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <ul class="navbar-nav">
+     <ul class="navbar-nav">
   <li class="nav-item">
     <a class="nav-link" href="#">{{name}}</a>
   </li>
 </ul>
-
   </div>
 </nav>
 
-
+<div id="posts-container" style="">
+  <form class="new-post-form">
+    <h2>New Post</h2>
+    <div>
+      <label for="post-name">Title:</label>
+      <input type="text" id="post-name" name="post-name">
+    </div>
+    <div>
+      <label for="post-content">Content:</label>
+      <textarea id="post-content" name="post-content"></textarea>
+    </div>
+    <button type="submit">Create Post</button>
+  </form>
+  <hr>
+  <h2>Posts</h2>
+  <div class="post-list">
+    <!-- Your posts go here -->
+  </div>
+</div>
 <body>
     <div class="container-fluid mt-100">
         <div class="row">
             <div class="col-md-12">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <div class="media flex-wrap w-100 align-items-center"> <img src="https://i.imgur.com/iNmBizf.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                            <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">Tom Harry</a>
-                                <div class="text-muted small">13 days ago</div>
+                        <div class="media flex-wrap w-100 align-items-center"> <img src="" class="d-block ui-w-40 rounded-circle" alt="">
+                            <div class="media-body ml-3">{{name}}</a>
+                                <div class="text-muted small">{{date_created}}</div>
                             </div>
                             <div class="text-muted small ml-3">
                                 <div>Member since <strong>01/1/2019</strong></div>
@@ -92,14 +57,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    {{!-- <div class="card-body">
                         <p> For me, getting my business website made was a lot of tech wizardry things. Thankfully i get an ad on Facebook ragarding commence website. I get connected with BBB team. They made my stunning website live in just 3 days.
                             With the increase demand of online customers. I had to take my business online. BBB Team guided me at each step and enabled me to centralise my work and have control on all aspect of my online business.
                         </p>
                         <p> For me, getting my business website made was a lot of tech wizardry things. Thankfully i get an ad on Facebook ragarding commence website. I get connected with BBB team. They made my stunning website live in just 3 days.
                             With the increase demand of online customers. I had to take my business online. BBB Team guided me at each step and enabled me to centralise my work and have control on all aspect of my online business.
                         </p>
-                    </div>
+                    </div> --}}
                     <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
                         <div class="px-4 pt-3"> <a href="javascript:void(0)" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">445</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">14532</span> </span> </div>
                         <div class="px-4 pt-3"> <button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Reply</button> </div>
@@ -189,4 +154,5 @@
                         <div class="px-4 pt-3"> <button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Reply</button> </div>
                     </div>
                 </div>
+
 <script src="./js/profile.js"></script>
