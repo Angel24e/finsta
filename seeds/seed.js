@@ -6,16 +6,16 @@ const userData = require('./userData.json');
 const postsData = require('./postsData.json');
 
 const seedDatabase = async () => {
-    await sequelize.sync({ false: true });
+    await sequelize.sync({ force: true });
 
-    const users = await User.bulkCreate( userData ,{
+    const users = await User.bulkCreate(userData, {
         individualHooks: true,
         returning: true,
     });
     /// what should be placed instead of users?
-    for (const posts of postsData) {
+    for (const Post of postsData) {
         await Post.create({
-            ...posts,
+            ...Post,
             user_id: users[Math.floor(Math.random() * users.length)].id,
         });
     }
