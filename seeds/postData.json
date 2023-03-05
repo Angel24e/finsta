@@ -1,17 +1,21 @@
-
 [
-  
-    {
-      "name": "Fints",
-      "description": "Help",
-      "post": "I need help with my car."
-    },
-    {
-      "name": "Charles",
-      "description": "Help Me",
-      "post": "I need help with my laptop."
-    }
+  {
+    "title": "First Post",
+    "content": "This is the first post on the site",
+    "user_id": 1
+  },
+  {
+    "title": "Second Post",
+    "content": "This is the second post on the site",
+    "user_id": 2
+  },
+  {
+    "title": "Third Post",
+    "content": "This is the third post on the site",
+    "user_id": 3
+  }
 ]
+
     
   
  
