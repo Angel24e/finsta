@@ -5,7 +5,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(#0b999e, #048e62);
+    /* background: linear-gradient(#0b999e, #048e62); */
 }
 .container {
     text-align: center;

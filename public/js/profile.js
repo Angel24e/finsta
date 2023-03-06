@@ -1,4 +1,3 @@
-
 const newFormHandler = async (event) => {
   event.preventDefault();
 
@@ -15,7 +14,7 @@ const newFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      // document.location.replace('/profile');
+      document.location.replace('/profile');
     } else {
       alert('Failed to create post');
     }
@@ -37,30 +36,53 @@ const delButtonHandler = async (event) => {
     }
   }
 };
+const fetchPosts = async () => {
+  const response = await fetch('/api/posts');
+  const data = await response.json();
+  const postList = document.querySelector('.post-list');
+  postList.innerHTML = '';
 
-// fetch the posts data from the API
-fetch('/api/posts')
-  .then(response => response.json())
-  .then(data => {
-    // loop through the data and create a div for each post
-    data.forEach(post => {
-      const postDiv = document.createElement('div');
-      postDiv.innerHTML = `
-        <h3>${post.title}</h3>
-        <p>${post.content}</p>
-        <button type="button" data-id="${post.id}" class="delete-btn btn btn-danger">Delete</button>
-      `;
-      postDiv.setAttribute('class', 'post-div');
-      document.querySelector('#posts-container').appendChild(postDiv);
-    });
+  data.forEach(post => {
+    const postDiv = document.createElement('div');
+    postDiv.classList.add('post-div');
+
+    const titleDiv = document.createElement('div');
+    titleDiv.classList.add('title-div');
+    titleDiv.innerHTML = `<h3>${post.title}</h3>`;
+    postDiv.appendChild(titleDiv);
+
+    const contentDiv = document.createElement('div');
+    contentDiv.classList.add('content-div');
+    contentDiv.innerHTML = `<p>${post.content}</p>`;
+    postDiv.appendChild(contentDiv);
+
+    const buttonDiv = document.createElement('div');
+    buttonDiv.classList.add('button-div');
+    buttonDiv.innerHTML = `
+      <button type="button" data-id="${post.id}" class="delete-btn btn btn-danger">Delete</button>
+    `;
+    postDiv.appendChild(buttonDiv);
+
+    postList.appendChild(postDiv);
   });
+};
 
 // add event listener to submit button
-document
-  .querySelector('.new-post-form')
-  .addEventListener('submit', newFormHandler);
+document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
 
 // add event listener to delete button
-document
-  .querySelector('#posts-container')
-  .addEventListener('click', delButtonHandler);
+document.querySelector('.post-list').addEventListener('click', delButtonHandler);
+
+// fetch posts on page load
+fetchPosts();
+
+const postButton = document.querySelector('#post-button');
+const newPostForm = document.querySelector('.new-post-form');
+
+postButton.addEventListener('click', () => {
+  if (newPostForm.style.display === 'none') {
+    newPostForm.style.display = 'block';
+  } else {
+    newPostForm.style.display = 'none';
+  }
+});
