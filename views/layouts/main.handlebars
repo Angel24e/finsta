@@ -4,26 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In Form</title>
-    <link rel="stylesheet" href="css/login.css">
+    <title>Finsta</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"> --}}
+    {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-9DVr+ekwxRbhDZgBk+Syr6z8T6fskUp6xhL6QtVOyhxoX8lYmJd6Zs/HmQ2w1fj0D0oMsv+M31yNM/gFTJi9Yg==" crossorigin="anonymous" /> --}}
+
+    {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> --}}
+    {{!-- <link rel="stylesheet" href="forum.css"> --}}
+     {{!-- <link rel="stylesheet" href="css/login.css">  --}}
 </head>
 <body>
  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <span role="img" aria-label="money">💸</span>
-        <a href="/">Fund My Project!</a>
-      </h1>
-      <nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/login">login</a>
-        {{/if}}
-      </nav>
-    </header>
+    <header class="d-flex justify-content-center align-items-center p-2 mx-auto">
+  <h1 class="text-center">
+    <a href="/">Finsta</a>
+  </h1>
+  <nav>
+    <!-- Conditionally render login or logout links -->
+    {{#if logged_in}}
+    <a href="/profile">profile</a> |
+    <button class="no-button" id="logout">logout</button>
+    {{else}}
+    <a href="/login">login</a>
+    {{/if}}
+  </nav>
+</header>
+
     <main class="container container-fluid mt-5">
       <!-- Render the sub layout -->
       {{{ body }}}
