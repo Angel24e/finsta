@@ -14,7 +14,7 @@ const seedDatabase = async () => {
     });
     /// what should be placed instead of users?
     for (const post of postsData) {
-        await post.create({
+        await Post.create({
             ...post,
             user_id: users[Math.floor(Math.random() * users.length)].id,
         });
